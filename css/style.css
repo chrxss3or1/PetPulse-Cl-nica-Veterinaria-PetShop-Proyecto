@@ -1,0 +1,78 @@
+/* ==========================================================================
+   Estilos Globales de la Aplicación - PetPulse
+   ========================================================================== */
+
+/* Fondos personalizados */
+.bg-personalizado-negro {
+    background-color: #000000 !important;
+    min-height: 100vh;
+}
+
+.bg-personalizado-gris {
+    background-color: #1a1a1a !important; 
+}
+
+/* Textos personalizados */
+.text-personalizado-morado {
+    color: #a370f7 !important; 
+}
+
+/* Bordes personalizados */
+.border-personalizado-gris {
+    border: 1px solid #2d2d2d !important;
+}
+
+.border-personalizado-morado {
+    border: 1px solid #6f42c1 !important;
+}
+
+/* Inputs de formularios adaptados al modo oscuro */
+.input-personalizado-oscuro {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid #3a3a3a !important;
+}
+
+.input-personalizado-oscuro:focus {
+    border-color: #a370f7 !important;
+    box-shadow: 0 0 0 0.25rem rgba(111, 66, 193, 0.25) !important;
+}
+
+/* Botón Morado de la Veterinaria */
+.btn-personalizado-morado {
+    background-color: #6f42c1 !important;
+    border-color: #6f42c1 !important;
+    color: #ffffff !important;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-personalizado-morado:hover {
+    background-color: #5a32a3 !important;
+    border-color: #5a32a3 !important;
+    color: #ffffff !important;
+}
+
+/* Efectos de enlaces */
+.link-hover:hover {
+    text-decoration: underline !important;
+    opacity: 0.9;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+    background-color: rgba(111, 66, 193, 0.15);
+    color: #a370f7 !important;
+}
