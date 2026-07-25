@@ -173,12 +173,14 @@ function cambiarEstado(id){
     if(estado.innerHTML == "Activo"){
 
         estado.innerHTML = "Inactivo";
+        estado.className = "badge bg-secondary";
 
     }
 
     else{
 
         estado.innerHTML = "Activo";
+        estado.className = "badge bg-success";
 
     }
 

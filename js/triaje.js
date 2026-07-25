@@ -22,6 +22,12 @@ document.getElementById("triajeForm").addEventListener("submit", function(event)
             <h4 class="text-danger fw-bold">NIVEL 1: EMERGENCIA CRÍTICA</h4>
             <p class="text-light mb-0">El paciente <strong>${nombreMascota}</strong> requiere atención inmediata.</p>
         `;
+        var triajesRojos = JSON.parse(localStorage.getItem("triajesRojos")) || [];
+        triajesRojos.push({
+            mascota: nombreMascota || "Paciente sin nombre",
+            fecha: new Date().toLocaleString()
+        });
+        localStorage.setItem("triajesRojos", JSON.stringify(triajesRojos));
     } else if (puntajeTotal === 2) {
         resultadoDiv.className = "p-4 rounded-4 text-center my-4 bg-dark border border-warning";
         resultadoDiv.innerHTML = `

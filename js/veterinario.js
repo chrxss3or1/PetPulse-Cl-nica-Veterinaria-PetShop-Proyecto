@@ -1,3 +1,4 @@
+mostrarTriajesRojos();
 var recetas = JSON.parse(localStorage.getItem("recetas")) || [];
 
 
@@ -125,5 +126,26 @@ function eliminarReceta(index){
     mostrarRecetas();
 
 
+
+}
+function mostrarTriajesRojos(){
+
+    var triajesRojos = JSON.parse(localStorage.getItem("triajesRojos")) || [];
+    var cont = document.getElementById("alertaTriajesRojos");
+
+    if(triajesRojos.length === 0){
+        cont.innerHTML = '<div class="alert alert-secondary">No hay triajes rojos pendientes.</div>';
+        return;
+    }
+
+    var html = '<div class="alert alert-danger"><h5>🚨 Triajes Rojos</h5><ul class="mb-0">';
+
+    triajesRojos.forEach(function(t){
+        html += '<li>' + t.mascota + ' - ' + t.fecha + '</li>';
+    });
+
+    html += '</ul></div>';
+
+    cont.innerHTML = html;
 
 }
