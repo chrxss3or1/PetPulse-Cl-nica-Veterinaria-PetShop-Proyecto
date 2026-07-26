@@ -76,3 +76,27 @@
     background-color: rgba(111, 66, 193, 0.15);
     color: #a370f7 !important;
 }
+
+.text-muted{
+    color:#d6d6d6 !important;
+}
+
+.text-secondary{
+    color:#e0e0e0 !important;
+}
+
+p{
+    color:#ffffff !important;
+}
+
+small{
+    color:#d6d6d6 !important;
+}
+
+.card p{
+    color:#ffffff !important;
+}
+
+.card .text-muted{
+    color:#d6d6d6 !important;
+}
