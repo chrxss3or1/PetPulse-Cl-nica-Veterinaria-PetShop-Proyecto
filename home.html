@@ -4,138 +4,215 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PetPulse - Dashboard Principal</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="css/style.css" rel="stylesheet">
 </head>
+
 <body class="bg-personalizado-negro text-white">
 
-    <div class="container-fluid">
-        <div class="row">
-            
-            <nav class="col-md-3 col-lg-2 d-md-block bg-personalizado-gris sidebar vh-100 p-3 fixed-top border-end border-personalizado-gris">
-                <div class="mb-4 text-center text-md-start d-flex align-items-center gap-2">
-                    <i class="bi bi-activity text-personalizado-morado fs-4"></i>
-                    <h3 class="fw-bold text-personalizado-morado mb-0">PetPulse</h3>
-                </div>
-                
-                <span class="badge bg-dark text-personalizado-morado border border-personalizado-morado w-100 py-2 mb-3">
-                    <i class="bi bi-shield-check me-1"></i> Panel General
-                </span>
-                
-                <hr class="text-secondary">
-                
-                <ul class="nav flex-column gap-2">
-                    <li class="nav-item">
-                        <a class="nav-link active rounded text-white bg-personalizado-morado p-2 d-flex align-items-center gap-2" href="home.html">
-                            <i class="bi bi-house-door"></i> Inicio
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link rounded text-secondary link-hover p-2 text-light d-flex align-items-center gap-2" href="mascotas.html">
-                            <i class="bi bi-heart-pulse text-personalizado-morado"></i> Mis Mascotas
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
-                            <i class="bi bi-clipboard2-pulse"></i> Triaje de Síntomas
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
-                            <i class="bi bi-calendar-event"></i> Reservar Cita
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="tienda.html">
-                            <i class="bi bi-bag-dash"></i> PetShop / Tienda
-                        </a>
-                    </li>
-                </ul>
-                
-                <div class="position-absolute bottom-0 start-0 w-100 p-3">
-                    <hr class="text-secondary">
-                    <a href="index.html" class="btn btn-outline-danger w-100 fw-bold d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-box-arrow-left"></i> Cerrar Sesión
-                    </a>
-                </div>
-            </nav>
+<div class="container-fluid">
+<div class="row">
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4" style="margin-left: 16.666667% !important;">
-                
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom border-personalizado-gris">
-                    <h1 class="h2 fw-bold">Bienvenido al Sistema, <span class="text-personalizado-morado">Christian</span></h1>
-                </div>
+<nav class="col-md-3 col-lg-2 d-md-block bg-personalizado-gris sidebar vh-100 p-3 fixed-top border-end border-personalizado-gris">
 
-                <div id="homeAlertContainer"></div>
+    <div class="mb-4 text-center text-md-start d-flex align-items-center gap-2">
+        <i class="bi bi-activity text-personalizado-morado fs-4"></i>
+        <h3 class="fw-bold text-personalizado-morado mb-0">PetPulse</h3>
+    </div>
 
-                <div class="row g-4 mb-4">
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow-sm text-center">
-                            <h6 class="text-secondary fw-semibold">Pacientes Activos</h6>
-                            <h2 class="fw-bold text-personalizado-morado mt-2">0</h2>
-                            <p class="text-muted small mb-0">Expedientes Clínicos</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow-sm text-center">
-                            <h6 class="text-secondary fw-semibold">Consultas para Hoy</h6>
-                            <h2 class="fw-bold text-warning mt-2">0</h2>
-                            <p class="text-muted small mb-0">Agenda Veterinaria</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow-sm text-center">
-                            <h6 class="text-secondary fw-semibold">Alertas de Triaje</h6>
-                            <h2 class="fw-bold text-danger mt-2">0</h2>
-                            <p class="text-muted small mb-0">Urgencias Críticas</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow-sm text-center">
-                            <h6 class="text-secondary fw-semibold">Ventas del Mes</h6>
-                            <h2 class="fw-bold text-success mt-2">₡0</h2>
-                            <p class="text-muted small mb-0">Inventario PetShop</p>
-                        </div>
-                    </div>
-                </div>
+    <span class="badge bg-dark text-personalizado-morado border border-personalizado-morado w-100 py-2 mb-3">
+        <i class="bi bi-shield-check me-1"></i>
+        Panel General
+    </span>
 
-                <div class="bg-personalizado-gris p-5 rounded-4 border border-personalizado-gris shadow mb-5">
-                    <div class="d-flex align-items-center gap-3 mb-3">
-                        <i class="bi bi-shield-plus text-personalizado-morado fs-2"></i>
-                        <h3 class="fw-bold text-personalizado-morado mb-0">Protocolo de Atención Veterinaria y Admisión</h3>
-                    </div>
-                    <p class="text-secondary lead fs-6">
-                        Bienvenido al panel operativo central de <strong>PetPulse Hospital Veterinario</strong>. Desde este módulo puede gestionar de manera integrada el ingreso de pacientes al centro médico, ejecutar la evaluación sintomática automatizada mediante el semáforo de urgencias y asegurar el control de la agenda médica diaria.
-                    </p>
-                    
-                    <div class="row g-3 mt-3">
-                        <div class="col-md-6">
-                            <div class="p-3 bg-black rounded-3 border border-secondary">
-                                <h6 class="fw-bold text-white mb-2">
-                                    <i class="bi bi-file-earmark-medical text-personalizado-morado me-2"></i>Fase 1: Admisión General
-                                </h6>
-                                <p class="text-muted small mb-0">Registro y apertura del expediente digital único del paciente adjuntando su documentación fotográfica de identificación.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="p-3 bg-black rounded-3 border border-secondary">
-                                <h6 class="fw-bold text-white mb-2">
-                                    <i class="bi bi-heart-pulse text-warning me-2"></i>Fase 2: Triaje y Clasificación
-                                </h6>
-                                <p class="text-muted small mb-0">Procesamiento inteligente de signos clínicos para la asignación inmediata de prioridad médica en salas de atención.</p>
-                            </div>
-                        </div>
-                    </div>
+    <hr class="text-secondary">
 
-                    <a href="mascotas.html" class="btn btn-personalizado-morado mt-4 fw-bold px-4 py-2 shadow d-inline-flex align-items-center gap-2">
-                        <i class="bi bi-plus-circle"></i> Iniciar Registro de Paciente
-                    </a>
-                </div>
+    <ul class="nav flex-column gap-2">
 
-            </main>
+        <li class="nav-item">
+            <a class="nav-link active rounded text-white bg-personalizado-morado p-2 d-flex align-items-center gap-2" href="home.html">
+                <i class="bi bi-house-door"></i>
+                Inicio
+            </a>
+        </li>
 
+        <li class="nav-item">
+            <a class="nav-link rounded text-secondary link-hover p-2 text-light d-flex align-items-center gap-2" href="mascotas.html">
+                <i class="bi bi-heart-pulse text-personalizado-morado"></i>
+                Mis Mascotas
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
+                <i class="bi bi-clipboard2-pulse"></i>
+                Triaje de Síntomas
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
+                <i class="bi bi-calendar-event"></i>
+                Reservar Cita
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="veterinario.html">
+                <i class="bi bi-clipboard2-heart"></i>
+                Veterinario
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="admin.html">
+                <i class="bi bi-speedometer2"></i>
+                Administración
+            </a>
+        </li>
+
+      <li class="nav-item">
+    <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2"
+       href="petshop.html">
+        <i class="bi bi-bag-dash"></i>
+        PetShop / Tienda
+    </a>
+</li>
+
+    </ul>
+
+    <div class="position-absolute bottom-0 start-0 w-100 p-3">
+
+        <hr class="text-secondary">
+
+        <a href="index.html"
+           class="btn btn-outline-danger w-100 fw-bold d-flex align-items-center justify-content-center gap-2">
+            <i class="bi bi-box-arrow-left"></i>
+            Cerrar Sesión
+        </a>
+
+    </div>
+
+</nav>
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4"
+      style="margin-left:16.666667% !important;">
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom border-personalizado-gris">
+    <h1 class="h2 fw-bold">
+        Bienvenido al Sistema,
+        <span class="text-personalizado-morado">Christian</span>
+    </h1>
+</div>
+
+<div id="homeAlertContainer"></div>
+
+<div class="row g-4 mb-4">
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow-sm text-center">
+            <h6 class="text-secondary fw-semibold">Pacientes Activos</h6>
+            <h2 class="fw-bold text-personalizado-morado mt-2">0</h2>
+            <p class="text-muted small mb-0">Expedientes Clínicos</p>
         </div>
     </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow-sm text-center">
+            <h6 class="text-secondary fw-semibold">Consultas para Hoy</h6>
+            <h2 class="fw-bold text-warning mt-2">0</h2>
+            <p class="text-muted small mb-0">Agenda Veterinaria</p>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow-sm text-center">
+            <h6 class="text-secondary fw-semibold">Alertas de Triaje</h6>
+            <h2 class="fw-bold text-danger mt-2">0</h2>
+            <p class="text-muted small mb-0">Urgencias Críticas</p>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow-sm text-center">
+            <h6 class="text-secondary fw-semibold">Ventas del Mes</h6>
+            <h2 class="fw-bold text-success mt-2">₡0</h2>
+            <p class="text-muted small mb-0">Inventario PetShop</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="bg-personalizado-gris p-5 rounded-4 border border-personalizado-gris shadow mb-5">
+
+    <div class="d-flex align-items-center gap-3 mb-3">
+        <i class="bi bi-shield-plus text-personalizado-morado fs-2"></i>
+        <h3 class="fw-bold text-personalizado-morado mb-0">
+            Protocolo de Atención Veterinaria y Admisión
+        </h3>
+    </div>
+
+    <p class="text-secondary lead fs-6">
+        Bienvenido al panel operativo central de
+        <strong>PetPulse Hospital Veterinario</strong>.
+        Desde este módulo puede gestionar de manera integrada el ingreso de
+        pacientes al centro médico, ejecutar la evaluación sintomática
+        automatizada mediante el semáforo de urgencias y asegurar el control
+        de la agenda médica diaria.
+    </p>
+
+    <div class="row g-3 mt-3">
+
+        <div class="col-md-6">
+            <div class="p-3 bg-black rounded-3 border border-secondary">
+
+                <h6 class="fw-bold text-white mb-2">
+                    <i class="bi bi-file-earmark-medical text-personalizado-morado me-2"></i>
+                    Fase 1: Admisión General
+                </h6>
+
+                <p class="text-muted small mb-0">
+                    Registro y apertura del expediente digital único del paciente
+                    adjuntando su documentación fotográfica de identificación.
+                </p>
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="p-3 bg-black rounded-3 border border-secondary">
+
+                <h6 class="fw-bold text-white mb-2">
+                    <i class="bi bi-heart-pulse text-warning me-2"></i>
+                    Fase 2: Triaje y Clasificación
+                </h6>
+
+                <p class="text-muted small mb-0">
+                    Procesamiento inteligente de signos clínicos para la asignación
+                    inmediata de prioridad médica en salas de atención.
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+    <a href="mascotas.html"
+       class="btn btn-personalizado-morado mt-4 fw-bold px-4 py-2 shadow d-inline-flex align-items-center gap-2">
+        <i class="bi bi-plus-circle"></i>
+        Iniciar Registro de Paciente
+    </a>
+
+</div>
+
+</main>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
