@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetPulse - Agendar Cita</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="bg-personalizado-negro text-white">
+
+    <div class="container-fluid">
+        <div class="row">
+            
+            <nav class="col-md-3 col-lg-2 d-md-block bg-personalizado-gris sidebar vh-100 p-3 fixed-top border-end border-personalizado-gris">
+                <div class="mb-4 text-center text-md-start d-flex align-items-center gap-2">
+                    <i class="bi bi-activity text-personalizado-morado fs-4"></i>
+                    <h3 class="fw-bold text-personalizado-morado mb-0">PetPulse</h3>
+                </div>
+                <span class="badge bg-dark text-personalizado-morado border border-personalizado-morado w-100 py-2 mb-3">
+                    <i class="bi bi-shield-check me-1"></i> Panel General
+                </span>
+                <hr class="text-secondary">
+                <ul class="nav flex-column gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="home.html">
+                            <i class="bi bi-house-door"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="mascotas.html">
+                            <i class="bi bi-heart-pulse"></i> Mis Mascotas 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
+                            <i class="bi bi-clipboard2-pulse"></i> Triaje de Síntomas 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active rounded text-white bg-personalizado-morado p-2 d-flex align-items-center gap-2" href="citas.html">
+                            <i class="bi bi-calendar-event"></i> Reservar Cita 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="petshop.html">
+                            <i class="bi bi-bag-dash"></i> PetShop / Tienda
+                        </a>
+                    </li>
+                </ul>
+                <div class="position-absolute bottom-0 start-0 w-100 p-3">
+                    <hr class="text-secondary">
+                    <a href="index.html" class="btn btn-outline-danger w-100 fw-bold d-flex align-items-center justify-content-center gap-2">
+                        <i class="bi bi-box-arrow-left"></i> Cerrar Sesión
+                    </a>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4" style="margin-left: 16.666667% !important;">
+                
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom border-personalizado-gris">
+                    <h1 class="h2 fw-bold">Gestión y Reserva de <span class="text-personalizado-morado">Citas Médicas</span></h1>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-md-5">
+                        <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow">
+                            <h4 class="fw-bold text-personalizado-morado mb-3">Agendar Espacio</h4>
+                            
+                            <form id="citaForm">
+                                <div class="mb-3">
+                                    <label for="citaMascota" class="form-label fw-semibold text-light">Paciente</label>
+                                    <input type="text" id="citaMascota" class="form-control input-personalizado-oscuro" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="citaVeterinario" class="form-label fw-semibold text-light">Veterinario Especialista</label>
+                                    <select id="citaVeterinario" class="form-select input-personalizado-oscuro" required>
+                                        <option value="" disabled selected>Seleccione un profesional...</option>
+                                        <option value="Dra. Valeria Mora (Medicina General)">Dra. Valeria Mora (Medicina General)</option>
+                                        <option value="Dr. Carlos Delgado (Cirugía/Urgencias)">Dr. Carlos Delgado (Cirugía / Urgencias)</option>
+                                        <option value="Dra. Ana Castro (Cardiología)">Dra. Ana Castro (Cardiología)</option>
+                                    </select>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="citaFecha" class="form-label fw-semibold text-light">Fecha</label>
+                                        <input type="date" id="citaFecha" class="form-control input-personalizado-oscuro" required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="citaHora" class="form-label fw-semibold text-light">Hora</label>
+                                        <input type="time" id="citaHora" class="form-control input-personalizado-oscuro" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="citaPrioridad" class="form-label fw-semibold text-light">Prioridad Asignada</label>
+                                    <input type="text" id="citaPrioridad" class="form-control input-personalizado-oscuro fw-bold text-center" readonly>
+                                </div>
+
+                                <button type="submit" class="btn btn-personalizado-morado w-100 py-2 fw-bold shadow d-flex align-items-center justify-content-center gap-2">
+                                    <i class="bi bi-calendar-check"></i> Confirmar Cita Médica
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow h-100">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="fw-bold text-light mb-0">Control de Consultas Activas</h4>
+                                <span class="badge bg-dark text-personalizado-morado border border-personalizado-morado px-3 py-2" id="contadorCitas">
+                                    0 Citas Registradas
+                                </span>
+                            </div>
+                            
+                            <div class="table-responsive">
+                                <table class="table table-dark table-hover align-middle mb-0 text-center">
+                                    <thead>
+                                        <tr class="text-secondary border-bottom border-secondary small">
+                                            <th scope="col">Paciente</th>
+                                            <th scope="col">Especialista</th>
+                                            <th scope="col">Fecha / Hora</th>
+                                            <th scope="col">Prioridad</th>
+                                            <th scope="col">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaCitasBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="tablaVaciaMensaje" class="text-center py-5 text-muted">
+                                <i class="bi bi-calendar-x display-5 d-block mb-2"></i>
+                                <p class="mb-0 small">No hay citas agendadas en este momento.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+
+    <script src="js/citas.js"></script>
+</body>
+</html>
