@@ -1,13 +1,13 @@
 var productosTienda = [
-    { id: 1, nombre: "Alimento Premium Perro Adulto", categoria: "Alimento", precio: 15000, img: "https://placehold.co/300x200/1a1a1a/a370f7?text=Alimento" },
-    { id: 2, nombre: "Alimento Gato Esterilizado", categoria: "Alimento", precio: 12500, img: "https://placehold.co/300x200/1a1a1a/a370f7?text=Alimento" },
-    { id: 3, nombre: "Snacks Naturales Perro", categoria: "Alimento", precio: 4500, img: "https://placehold.co/300x200/1a1a1a/a370f7?text=Snacks" },
-    { id: 4, nombre: "Collar Ajustable Mediano", categoria: "Accesorio", precio: 5000, img: "https://placehold.co/300x200/1a1a1a/a370f7?text=Collar" },
-    { id: 5, nombre: "Correa Retráctil 5m", categoria: "Accesorio", precio: 9500, img: "https://placehold.co/300x200/1a1a1a/a370f7?text=Correa" },
-    { id: 6, nombre: "Cama Antiestrés Talla M", categoria: "Accesorio", precio: 18000, img: "https://placehold.co/300x200/1a1a1a/a370f7?text=Cama" },
-    { id: 7, nombre: "Antipulgas y Garrapatas", categoria: "Medicamento", precio: 8000, img: "https://placehold.co/300x200/1a1a1a/a370f7?text=Medicamento" },
-    { id: 8, nombre: "Desparasitante Interno", categoria: "Medicamento", precio: 6500, img: "https://placehold.co/300x200/1a1a1a/a370f7?text=Medicamento" },
-    { id: 9, nombre: "Suplemento Vitamínico", categoria: "Medicamento", precio: 11000, img: "https://placehold.co/300x200/1a1a1a/a370f7?text=Vitaminas" }
+    { id: 1, nombre: "Alimento Premium Perro Adulto", categoria: "Alimento", precio: 15000, img: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=500&q=80" },
+    { id: 2, nombre: "Alimento Gato Esterilizado", categoria: "Alimento", precio: 12500, img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=500&q=80" },
+    { id: 3, nombre: "Snacks Naturales Perro", categoria: "Alimento", precio: 4500, img: "https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=500&q=80" },
+    { id: 4, nombre: "Collar Ajustable Mediano", categoria: "Accesorio", precio: 5000, img: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=500&q=80" },
+    { id: 5, nombre: "Correa Retráctil 5m", categoria: "Accesorio", precio: 9500, img: "https://images.unsplash.com/photo-1535294435445-d7249524ef2e?w=500&q=80" },
+    { id: 6, nombre: "Cama Antiestrés Talla M", categoria: "Accesorio", precio: 18000, img: "https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?w=500&q=80" },
+    { id: 7, nombre: "Antipulgas y Garrapatas", categoria: "Medicamento", precio: 8000, img: "https://images.unsplash.com/photo-1628771065518-0d82f1938462?w=500&q=80" },
+    { id: 8, nombre: "Desparasitante Interno", categoria: "Medicamento", precio: 6500, img: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&q=80" },
+    { id: 9, nombre: "Suplemento Vitamínico", categoria: "Medicamento", precio: 11000, img: "https://images.unsplash.com/photo-1577401239170-897942555fb3?w=500&q=80" }
 ];
 
 var carrito = JSON.parse(localStorage.getItem("carritoPetPulse")) || [];
@@ -30,15 +30,14 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Al hacer clic en Procesar Pedido, guardamos y redirigimos a carrito.html
     document.getElementById("btnProcesarPedido").addEventListener("click", function() {
         if (carrito.length === 0) {
             alert("El carrito está vacío.");
             return;
         }
-        alert("Pedido procesado con éxito. ¡Gracias por su compra!");
-        carrito = [];
         guardarCarrito();
-        pintarCarrito();
+        window.location.href = "carrito.html";
     });
 
 });
@@ -58,7 +57,7 @@ function pintarProductos() {
         col.className = "col-sm-6 col-lg-4";
         col.innerHTML =
             '<div class="card bg-black text-white border-secondary h-100 shadow-sm">' +
-                '<img src="' + p.img + '" class="card-img-top" alt="' + p.nombre + '">' +
+                '<img src="' + p.img + '" class="card-img-top" alt="' + p.nombre + '" style="height: 180px; object-fit: cover;">' +
                 '<div class="card-body d-flex flex-column">' +
                     '<span class="badge bg-personalizado-morado align-self-start mb-2">' + p.categoria + '</span>' +
                     '<h6 class="fw-bold mb-1">' + p.nombre + '</h6>' +

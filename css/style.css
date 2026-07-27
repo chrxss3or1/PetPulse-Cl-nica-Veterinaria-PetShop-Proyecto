@@ -65,6 +65,7 @@
     left: 0;
     z-index: 100;
     box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.1);
+    overflow-y: auto;
 }
 
 .nav-link {
@@ -77,26 +78,30 @@
     color: #a370f7 !important;
 }
 
-.text-muted{
-    color:#d6d6d6 !important;
+.text-muted {
+    color: #d6d6d6 !important;
 }
 
-.text-secondary{
-    color:#e0e0e0 !important;
+.text-secondary {
+    color: #e0e0e0 !important;
 }
 
-p{
-    color:#ffffff !important;
+p {
+    color: #ffffff !important;
 }
 
-small{
-    color:#d6d6d6 !important;
+small {
+    color: #d6d6d6 !important;
 }
 
-.card p{
-    color:#ffffff !important;
+.card {
+    border-radius: 0.75rem;
 }
 
-.card .text-muted{
-    color:#d6d6d6 !important;
+.card p {
+    color: #ffffff !important;
+}
+
+.card .text-muted {
+    color: #d6d6d6 !important;
 }

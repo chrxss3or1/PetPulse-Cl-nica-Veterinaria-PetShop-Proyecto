@@ -1,87 +1,102 @@
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+var carritoPago = JSON.parse(localStorage.getItem("carritoPetPulse")) || [];
+var metodoSeleccionado = 'tarjeta';
 
-mostrarCarrito();
+document.addEventListener("DOMContentLoaded", function () {
+    renderizarResumen();
 
+    document.getElementById("formCheckout").addEventListener("submit", function (e) {
+        e.preventDefault();
 
-function mostrarCarrito(){
+        if (carritoPago.length === 0) {
+            alert("No hay ningún pedido activo para procesar.");
+            return;
+        }
 
-    let contenedor = document.getElementById("listaCarrito");
+        alert("¡Pago realizado con éxito mediante " + metodoSeleccionado.toUpperCase() + "! Tu pedido ya está en camino.");
+        
+        // Limpiamos el carrito en localStorage y regresamos a la tienda
+        localStorage.removeItem("carritoPetPulse");
+        window.location.href = "Tienda.html";
+    });
+});
+
+function renderizarResumen() {
+    var contenedor = document.getElementById("resumenListaProductos");
+    var subtotalEl = document.getElementById("resumenSubtotal");
+    var impuestoEl = document.getElementById("resumenImpuesto");
+    var totalEl = document.getElementById("resumenTotal");
 
     contenedor.innerHTML = "";
 
-    if(carrito.length === 0){
-
-        contenedor.innerHTML = `
-        <div class="alert alert-warning">
-            El carrito está vacío
-        </div>
-        `;
-
+    if (carritoPago.length === 0) {
+        contenedor.innerHTML = '<p class="text-secondary text-center">El carrito está vacío.</p>';
+        subtotalEl.innerText = "₡0";
+        impuestoEl.innerText = "₡0";
+        totalEl.innerText = "₡0";
         return;
     }
 
+    var subtotal = 0;
 
-    let total = 0;
+    for (var i = 0; i < carritoPago.length; i++) {
+        var prod = carritoPago[i];
+        var totalProducto = prod.precio * prod.cantidad;
+        subtotal += totalProducto;
 
+        var div = document.createElement("div");
+        div.className = "d-flex justify-content-between align-items-center mb-2";
+        div.innerHTML = 
+            '<div>' +
+                '<h6 class="mb-0 small fw-bold">' + prod.nombre + '</h6>' +
+                '<small class="text-secondary">' + prod.cantidad + ' x ₡' + prod.precio.toLocaleString() + '</small>' +
+            '</div>' +
+            '<span class="fw-bold small">₡' + totalProducto.toLocaleString() + '</span>';
 
-    carrito.forEach(function(producto,index){
+        contenedor.appendChild(div);
+    }
 
-        total += producto.precio;
+    var impuesto = subtotal * 0.13;
+    var total = subtotal + impuesto;
 
-
-        contenedor.innerHTML += `
-
-        <div class="card bg-personalizado-gris text-white mb-3">
-
-            <div class="card-body d-flex justify-content-between align-items-center">
-
-                <div>
-                    <h5>${producto.nombre}</h5>
-                    <p class="text-secondary">
-                    ${producto.categoria}
-                    </p>
-                </div>
-
-
-                <div>
-
-                    <h5 class="text-success">
-                    ₡${producto.precio}
-                    </h5>
-
-
-                    <button class="btn btn-danger"
-                    onclick="eliminar(${index})">
-                    Eliminar
-                    </button>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-        `;
-
-
-    });
-
-
-    document.getElementById("total").innerHTML = 
-    "Total: ₡" + total;
-
-
+    subtotalEl.innerText = "₡" + subtotal.toLocaleString();
+    impuestoEl.innerText = "₡" + impuesto.toLocaleString(undefined, { maximumFractionDigits: 0 });
+    totalEl.innerText = "₡" + total.toLocaleString(undefined, { maximumFractionDigits: 0 });
 }
 
+function seleccionarMetodo(metodo, elemento) {
+    metodoSeleccionado = metodo;
 
+    var cards = document.querySelectorAll(".metodo-pago-card");
+    for (var i = 0; i < cards.length; i++) {
+        cards[i].classList.remove("active");
+    }
+    elemento.classList.add("active");
 
-function eliminar(index){
+    var panelTarjeta = document.getElementById("panelTarjeta");
+    var panelExpress = document.getElementById("panelExpress");
+    var textoExpress = document.getElementById("textoExpress");
 
-    carrito.splice(index,1);
+    var inputsTarjeta = panelTarjeta.querySelectorAll("input");
 
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+    if (metodo === 'tarjeta') {
+        panelTarjeta.classList.remove("d-none");
+        panelExpress.classList.add("d-none");
+        for (var j = 0; j < inputsTarjeta.length; j++) {
+            inputsTarjeta[j].required = true;
+        }
+    } else {
+        panelTarjeta.classList.add("d-none");
+        panelExpress.classList.remove("d-none");
+        for (var k = 0; k < inputsTarjeta.length; k++) {
+            inputsTarjeta[k].required = false;
+        }
 
-    mostrarCarrito();
-
+        if (metodo === 'paypal') {
+            textoExpress.innerText = "Serás redirigido a PayPal para autenticar y completar tu pago seguro.";
+        } else if (metodo === 'gpay') {
+            textoExpress.innerText = "Se abrirá la ventana emergente de Google Pay para autorizar el cargo.";
+        } else if (metodo === 'applepay') {
+            textoExpress.innerText = "Usa Touch ID / Face ID en tu dispositivo Apple para confirmar el pago.";
+        }
+    }
 }

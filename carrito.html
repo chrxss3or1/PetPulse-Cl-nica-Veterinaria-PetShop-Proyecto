@@ -1,41 +1,228 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-<meta charset="UTF-8">
-<title>Carrito - PetPulse</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<link href="css/style.css" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetPulse - Finalizar Compra</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .metodo-pago-card {
+            cursor: pointer;
+            border: 2px solid #333;
+            transition: all 0.2s ease-in-out;
+        }
+        .metodo-pago-card:hover {
+            border-color: #a370f7;
+        }
+        .metodo-pago-card.active {
+            border-color: #a370f7;
+            background-color: rgba(163, 112, 247, 0.1);
+        }
+    </style>
 </head>
-
-
 <body class="bg-personalizado-negro text-white">
 
+    <div class="container-fluid">
+        <div class="row">
+            
+            <!-- Sidebar Navigation -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-personalizado-gris sidebar vh-100 p-3 fixed-top border-end border-personalizado-gris">
+                <div class="mb-4 text-center text-md-start d-flex align-items-center gap-2">
+                    <i class="bi bi-activity text-personalizado-morado fs-4"></i>
+                    <h3 class="fw-bold text-personalizado-morado mb-0">PetPulse</h3>
+                </div>
+                <span class="badge bg-dark text-personalizado-morado border border-personalizado-morado w-100 py-2 mb-3">
+                    <i class="bi bi-shield-check me-1"></i> Panel General
+                </span>
+                <hr class="text-secondary">
+                <ul class="nav flex-column gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="home.html">
+                            <i class="bi bi-house-door"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="mascotas.html">
+                            <i class="bi bi-heart-pulse"></i> Mis Mascotas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
+                            <i class="bi bi-clipboard2-pulse"></i> Triaje de Síntomas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
+                            <i class="bi bi-calendar-event"></i> Reservar Cita
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="Tienda.html">
+                            <i class="bi bi-bag-dash"></i> PetShop / Tienda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="veterinario.html">
+                            <i class="bi bi-clipboard2-heart"></i> Veterinario
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="admin.html">
+                            <i class="bi bi-speedometer2"></i> Administración
+                        </a>
+                    </li>
+                </ul>
+                <div class="position-absolute bottom-0 start-0 w-100 p-3">
+                    <hr class="text-secondary">
+                    <a href="index.html" class="btn btn-outline-danger w-100 fw-bold d-flex align-items-center justify-content-center gap-2">
+                        <i class="bi bi-box-arrow-left"></i> Cerrar Sesión
+                    </a>
+                </div>
+            </nav>
 
-<div class="container mt-5">
+            <!-- Main Content Area -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4" style="margin-left: 16.666667% !important;">
+                
+                <div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-4 border-bottom border-personalizado-gris">
+                    <h1 class="h2 fw-bold"><i class="bi bi-credit-card text-personalizado-morado me-2"></i>Finalizar <span class="text-personalizado-morado">Compra</span></h1>
+                    <a href="Tienda.html" class="btn btn-outline-light btn-sm"><i class="bi bi-arrow-left me-1"></i> Volver a la Tienda</a>
+                </div>
 
-<h2>
-<i class="bi bi-cart-fill"></i>
-Carrito de compras
-</h2>
+                <div class="row g-4 mb-5">
+                    
+                    <!-- Formulario de Checkout y Selección de Método de Pago -->
+                    <div class="col-lg-7">
+                        <form id="formCheckout">
+                            
+                            <!-- Sección 1: Datos de Entrega -->
+                            <div class="card bg-personalizado-gris border-secondary text-white p-4 mb-4 shadow-sm">
+                                <h5 class="fw-bold text-personalizado-morado mb-3"><i class="bi bi-geo-alt me-2"></i>1. Datos de Entrega</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label small">Nombre Completo</label>
+                                        <input type="text" class="form-control bg-dark text-white border-secondary" required placeholder="Ej: Juan Pérez">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small">Teléfono de Contacto</label>
+                                        <input type="tel" class="form-control bg-dark text-white border-secondary" required placeholder="8888-8888">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label small">Dirección Exacta de Envío</label>
+                                        <input type="text" class="form-control bg-dark text-white border-secondary" required placeholder="San José, Curridabat, de la Iglesia 200m Sur...">
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!-- Sección 2: Selección de Método de Pago -->
+                            <div class="card bg-personalizado-gris border-secondary text-white p-4 mb-4 shadow-sm">
+                                <h5 class="fw-bold text-personalizado-morado mb-3"><i class="bi bi-wallet2 me-2"></i>2. Método de Pago</h5>
+                                
+                                <div class="row g-2 mb-4">
+                                    <!-- Tarjeta Crédito / Débito -->
+                                    <div class="col-6 col-md-3">
+                                        <div class="card bg-black p-3 text-center metodo-pago-card active" onclick="seleccionarMetodo('tarjeta', this)">
+                                            <i class="bi bi-credit-card-2-front fs-2 text-personalizado-morado"></i>
+                                            <span class="small d-block mt-1 fw-bold">Tarjeta</span>
+                                        </div>
+                                    </div>
+                                    <!-- PayPal -->
+                                    <div class="col-6 col-md-3">
+                                        <div class="card bg-black p-3 text-center metodo-pago-card" onclick="seleccionarMetodo('paypal', this)">
+                                            <i class="bi bi-paypal fs-2 text-primary"></i>
+                                            <span class="small d-block mt-1 fw-bold">PayPal</span>
+                                        </div>
+                                    </div>
+                                    <!-- Google Pay -->
+                                    <div class="col-6 col-md-3">
+                                        <div class="card bg-black p-3 text-center metodo-pago-card" onclick="seleccionarMetodo('gpay', this)">
+                                            <i class="bi bi-google fs-2 text-warning"></i>
+                                            <span class="small d-block mt-1 fw-bold">Google Pay</span>
+                                        </div>
+                                    </div>
+                                    <!-- Apple Pay -->
+                                    <div class="col-6 col-md-3">
+                                        <div class="card bg-black p-3 text-center metodo-pago-card" onclick="seleccionarMetodo('applepay', this)">
+                                            <i class="bi bi-apple fs-2 text-light"></i>
+                                            <span class="small d-block mt-1 fw-bold">Apple Pay</span>
+                                        </div>
+                                    </div>
+                                </div>
 
-<div id="listaCarrito"></div>
+                                <!-- Formulario de Tarjeta -->
+                                <div id="panelTarjeta">
+                                    <div class="d-flex align-items-center gap-2 mb-3">
+                                        <span class="small text-secondary">Marcas aceptadas:</span>
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" height="18" class="bg-white p-1 rounded">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" height="18">
+                                    </div>
 
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label small">Número de Tarjeta</label>
+                                            <div class="input-group">
+                                                <input type="text" id="inputTarjeta" class="form-control bg-dark text-white border-secondary" placeholder="4000 1234 5678 9010" maxlength="19" required>
+                                                <span class="input-group-text bg-dark border-secondary text-secondary"><i class="bi bi-lock-fill"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small">Expiración (MM/AA)</label>
+                                            <input type="text" class="form-control bg-dark text-white border-secondary" placeholder="08/28" maxlength="5" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small">CVV / CVC</label>
+                                            <input type="password" class="form-control bg-dark text-white border-secondary" placeholder="123" maxlength="4" required>
+                                        </div>
+                                    </div>
+                                </div>
 
-<a href="petshop.html" class="btn btn-primary">
-Volver al PetShop
-</a>
+                                <!-- Panel Alternativo para Explicar Express Checkout -->
+                                <div id="panelExpress" class="d-none alert alert-dark border-secondary text-white text-center py-4 mb-0">
+                                    <p id="textoExpress" class="mb-0 fw-semibold"></p>
+                                </div>
 
+                                <button type="submit" class="btn btn-personalizado-morado w-100 fw-bold mt-4 py-2 fs-5 d-flex align-items-center justify-content-center gap-2">
+                                    <i class="bi bi-shield-lock-fill"></i> Confirmar y Pagar
+                                </button>
+                            </div>
 
-</div>
+                        </form>
+                    </div>
 
+                    <!-- Resumen del Pedido -->
+                    <div class="col-lg-5">
+                        <div class="card bg-personalizado-gris border-secondary text-white p-4 shadow-sm position-sticky" style="top: 20px;">
+                            <h5 class="fw-bold text-personalizado-morado mb-3"><i class="bi bi-bag-check me-2"></i>Resumen del Pedido</h5>
+                            
+                            <div id="resumenListaProductos" class="mb-3 border-bottom border-secondary pb-3" style="max-height: 250px; overflow-y: auto;">
+                                <!-- Se renderiza dinámicamente -->
+                            </div>
 
-<script src="js/carrito.js"></script>
+                            <div class="d-flex justify-content-between small text-secondary">
+                                <span>Subtotal</span>
+                                <span id="resumenSubtotal">₡0</span>
+                            </div>
+                            <div class="d-flex justify-content-between small text-secondary mb-2">
+                                <span>IVA (13%)</span>
+                                <span id="resumenImpuesto">₡0</span>
+                            </div>
+                            <div class="d-flex justify-content-between fw-bold fs-4 text-white border-top border-secondary pt-2">
+                                <span>Total a Pagar</span>
+                                <span class="text-personalizado-morado" id="resumenTotal">₡0</span>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/carrito.js"></script>
 </body>
-
 </html>
