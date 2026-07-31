@@ -24,55 +24,53 @@
                 <hr class="text-secondary">
                 <ul class="nav flex-column gap-2">
                      <li class="nav-item">
-            <a class="nav-link active rounded text-white bg-personalizado-morado p-2 d-flex align-items-center gap-2" href="home.html">
-                <i class="bi bi-house-door"></i>
-                Inicio
-            </a>
-        </li>
+                        <a class="nav-link rounded text-secondary link-hover p-2 text-light d-flex align-items-center gap-2" href="home.html">
+                            <i class="bi bi-house-door"></i>
+                            Inicio
+                        </a>
+                    </li>
 
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 text-light d-flex align-items-center gap-2" href="mascotas.html">
-                <i class="bi bi-heart-pulse text-personalizado-morado"></i>
-                Mis Mascotas
-            </a>
-        </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded text-secondary link-hover p-2 text-light d-flex align-items-center gap-2" href="mascotas.html">
+                            <i class="bi bi-heart-pulse text-personalizado-morado"></i>
+                            Mis Mascotas
+                        </a>
+                    </li>
 
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
-                <i class="bi bi-clipboard2-pulse"></i>
-                Triaje de Síntomas
-            </a>
-        </li>
+                    <li class="nav-item">
+                        <a class="nav-link active rounded text-white bg-personalizado-morado p-2 d-flex align-items-center gap-2" href="triaje.html">
+                            <i class="bi bi-clipboard2-pulse"></i>
+                            Triaje de Síntomas
+                        </a>
+                    </li>
 
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
-                <i class="bi bi-calendar-event"></i>
-                Reservar Cita
-            </a>
-        </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
+                            <i class="bi bi-calendar-event"></i>
+                            Reservar Cita
+                        </a>
+                    </li>
 
-          <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2"
-             href="Tienda.html">
-             <i class="bi bi-bag-dash"></i>
-             PetShop / Tienda
-           </a>
-       </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="Tienda.html">
+                            <i class="bi bi-bag-dash"></i>
+                            PetShop / Tienda
+                        </a>
+                    </li>
 
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="veterinario.html">
-                <i class="bi bi-clipboard2-heart"></i>
-                Veterinario
-            </a>
-        </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="veterinario.html">
+                            <i class="bi bi-clipboard2-heart"></i>
+                            Veterinario
+                        </a>
+                    </li>
 
-
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="admin.html">
-                <i class="bi bi-speedometer2"></i>
-                Administración
-            </a>
-        </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="admin.html">
+                            <i class="bi bi-speedometer2"></i>
+                            Administración
+                        </a>
+                    </li>
                 </ul>
                 <div class="position-absolute bottom-0 start-0 w-100 p-3">
                     <hr class="text-secondary">
@@ -100,40 +98,110 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label fw-semibold text-light">Seleccione los síntomas observados:</label>
+                                    <label class="form-label fw-semibold text-light mb-3">Seleccione todos los síntomas observados:</label>
                                     
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="3" id="sintomaGrave1">
-                                        <label class="form-check-label text-danger" for="sintomaGrave1">
-                                            Dificultad severa para respirar o sangrado activo
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="3" id="sintomaGrave2">
-                                        <label class="form-check-label text-danger" for="sintomaGrave2">
-                                            Inconsciencia, desmayo o convulsiones
-                                        </label>
+                                    <!-- SÍNTOMAS GRAVES / ROJOS -->
+                                    <div class="p-3 mb-3 border border-danger border-opacity-50 rounded-3 bg-dark">
+                                        <h6 class="text-danger fw-bold mb-2"><i class="bi bi-exclamation-octagon-fill me-1"></i> Emergencia Crítica (Rojo)</h6>
+                                        
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="3" id="sg1">
+                                            <label class="form-check-label text-danger" for="sg1">Dificultad severa para respirar o asfixia</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="3" id="sg2">
+                                            <label class="form-check-label text-danger" for="sg2">Inconsciencia, desmayo o convulsiones</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="3" id="sg3">
+                                            <label class="form-check-label text-danger" for="sg3">Hemorragia o sangrado activo incontrolable</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="3" id="sg4">
+                                            <label class="form-check-label text-danger" for="sg4">Atropello, caída severa o traumatismo grave</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="3" id="sg5">
+                                            <label class="form-check-label text-danger" for="sg5">Envenenamiento o ingesta de tóxicos sospechada</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="3" id="sg6">
+                                            <label class="form-check-label text-danger" for="sg6">Incapacidad para orinar (esfuerzo sin éxito)</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="3" id="sg7">
+                                            <label class="form-check-label text-danger" for="sg7">Encías pálidas, azuladas o muy blancas</label>
+                                        </div>
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="3" id="sg8">
+                                            <label class="form-check-label text-danger" for="sg8">Abdomen extremadamente hinchado o duro</label>
+                                        </div>
                                     </div>
 
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="2" id="sintomaMedio1">
-                                        <label class="form-check-label text-warning" for="sintomaMedio1">
-                                            Vómitos repetidos o diarrea con deshidratación
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="2" id="sintomaMedio2">
-                                        <label class="form-check-label text-warning" for="sintomaMedio2">
-                                            Cojera evidente o dolor moderado al caminar
-                                        </label>
+                                    <!-- SÍNTOMAS MEDIOS / AMARILLOS -->
+                                    <div class="p-3 mb-3 border border-warning border-opacity-50 rounded-3 bg-dark">
+                                        <h6 class="text-warning fw-bold mb-2"><i class="bi bi-exclamation-triangle-fill me-1"></i> Urgencia Moderada (Amarillo)</h6>
+                                        
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="2" id="sm1">
+                                            <label class="form-check-label text-warning" for="sm1">Vómitos repetidos en las últimas 12 horas</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="2" id="sm2">
+                                            <label class="form-check-label text-warning" for="sm2">Diarrea continua con o sin rastros de sangre</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="2" id="sm3">
+                                            <label class="form-check-label text-warning" for="sm3">Cojera evidente o dolor al intentar caminar</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="2" id="sm4">
+                                            <label class="form-check-label text-warning" for="sm4">Fiebre visible, temblores o letargo marcado</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="2" id="sm5">
+                                            <label class="form-check-label text-warning" for="sm5">Infección u ocular con inflamación/secreción</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="2" id="sm6">
+                                            <label class="form-check-label text-warning" for="sm6">Desorientación, bamboleo o incoordinación</label>
+                                        </div>
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="2" id="sm7">
+                                            <label class="form-check-label text-warning" for="sm7">Pérdida total del apetito por más de 24 horas</label>
+                                        </div>
                                     </div>
 
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="1" id="sintomaLeve1">
-                                        <label class="form-check-label text-success" for="sintomaLeve1">
-                                            Pérdida leve del apetito o decaimiento bajo
-                                        </label>
+                                    <!-- SÍNTOMAS LEVES / VERDES -->
+                                    <div class="p-3 mb-3 border border-success border-opacity-50 rounded-3 bg-dark">
+                                        <h6 class="text-success fw-bold mb-2"><i class="bi bi-info-circle-fill me-1"></i> Atención General (Verde)</h6>
+                                        
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="1" id="sl1">
+                                            <label class="form-check-label text-success" for="sl1">Pérdida leve del apetito o ligera apatía</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="1" id="sl2">
+                                            <label class="form-check-label text-success" for="sl2">Rascado frecuente o picazón en la piel/orejas</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="1" id="sl3">
+                                            <label class="form-check-label text-success" for="sl3">Estornudos ocasionales o tos leve aislada</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="1" id="sl4">
+                                            <label class="form-check-label text-success" for="sl4">Mal aliento o acumulación leve de sarro dental</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="1" id="sl5">
+                                            <label class="form-check-label text-success" for="sl5">Ligeras legañas o secreción nasal transparente</label>
+                                        </div>
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input sintoma-checkbox" type="checkbox" value="1" id="sl6">
+                                            <label class="form-check-label text-success" for="sl6">Revisión preventiva de rutina o vacunas</label>
+                                        </div>
                                     </div>
+
                                 </div>
 
                                 <button type="submit" class="btn btn-personalizado-morado w-100 py-2 fw-bold shadow d-flex align-items-center justify-content-center gap-2">
@@ -147,7 +215,7 @@
                         <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow h-100 d-flex flex-column justify-content-between">
                             <div>
                                 <h4 class="fw-bold text-light mb-3">Estado del Semáforo Médico</h4>
-                                <p class="text-secondary small">El sistema calcula el nivel de riesgo analizando los pesos numéricos asignados a cada signo clínico.</p>
+                                <p class="text-secondary small">El sistema calcula el nivel de riesgo analizando los pesos numéricos asignados a cada signo clínico marcado.</p>
                             </div>
 
                             <div id="resultadoTriaje" class="p-4 rounded-4 border border-secondary text-center my-4 bg-black">

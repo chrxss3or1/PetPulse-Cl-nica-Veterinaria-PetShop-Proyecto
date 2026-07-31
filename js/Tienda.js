@@ -1,13 +1,13 @@
 var productosTienda = [
-    { id: 1, nombre: "Alimento Premium Perro Adulto", categoria: "Alimento", precio: 15000, img: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=500&q=80" },
-    { id: 2, nombre: "Alimento Gato Esterilizado", categoria: "Alimento", precio: 12500, img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=500&q=80" },
+{ id: 1, nombre: "Alimento Premium Perro Adulto", categoria: "Alimento", precio: 15000, img: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=500&q=80" },
+    { id: 2, nombre: "Alimento Gato Esterilizado", categoria: "Alimento", precio: 12500, img: "https://images.unsplash.com/photo-1596854331442-3cf47265cefb?w=500&q=80" },
     { id: 3, nombre: "Snacks Naturales Perro", categoria: "Alimento", precio: 4500, img: "https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=500&q=80" },
-    { id: 4, nombre: "Collar Ajustable Mediano", categoria: "Accesorio", precio: 5000, img: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=500&q=80" },
-    { id: 5, nombre: "Correa Retráctil 5m", categoria: "Accesorio", precio: 9500, img: "https://images.unsplash.com/photo-1535294435445-d7249524ef2e?w=500&q=80" },
+    { id: 4, nombre: "Collar Ajustable Mediano", categoria: "Accesorio", precio: 5000, img: "https://plus.unsplash.com/premium_photo-1692392181661-96c4b34759db?w=500&q=80" },
+    { id: 5, nombre: "Correa Retráctil 5m", categoria: "Accesorio", precio: 9500, img: "https://images.unsplash.com/photo-1719910448385-66fae551f812?w=500&q=80" },
     { id: 6, nombre: "Cama Antiestrés Talla M", categoria: "Accesorio", precio: 18000, img: "https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?w=500&q=80" },
     { id: 7, nombre: "Antipulgas y Garrapatas", categoria: "Medicamento", precio: 8000, img: "https://images.unsplash.com/photo-1628771065518-0d82f1938462?w=500&q=80" },
     { id: 8, nombre: "Desparasitante Interno", categoria: "Medicamento", precio: 6500, img: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&q=80" },
-    { id: 9, nombre: "Suplemento Vitamínico", categoria: "Medicamento", precio: 11000, img: "https://images.unsplash.com/photo-1577401239170-897942555fb3?w=500&q=80" }
+    { id: 9, nombre: "Suplemento Vitamínico", categoria: "Medicamento", precio: 11000, img: "https://images.unsplash.com/photo-1584017911766-d451b3d0e843?w=500&q=80" }
 ];
 
 var carrito = JSON.parse(localStorage.getItem("carritoPetPulse")) || [];
