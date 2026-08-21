@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PetPulse - Agendar Cita</title>
+    <!-- CSS Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="css/style.css" rel="stylesheet">
@@ -13,6 +14,7 @@
     <div class="container-fluid">
         <div class="row">
             
+            <!-- Menú Lateral / Sidebar -->
             <nav class="col-md-3 col-lg-2 d-md-block bg-personalizado-gris sidebar vh-100 p-3 fixed-top border-end border-personalizado-gris">
                 <div class="mb-4 text-center text-md-start d-flex align-items-center gap-2">
                     <i class="bi bi-activity text-personalizado-morado fs-4"></i>
@@ -23,57 +25,47 @@
                 </span>
                 <hr class="text-secondary">
                 <ul class="nav flex-column gap-2">
-                     <li class="nav-item">
-            <a class="nav-link active rounded text-white bg-personalizado-morado p-2 d-flex align-items-center gap-2" href="home.html">
-                <i class="bi bi-house-door"></i>
-                Inicio
-            </a>
-        </li>
+    <!-- Visibles para TODOS (Cliente, Veterinario, Admin) -->
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="home.html">
+            <i class="bi bi-house-door"></i> Inicio
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="mascotas.html">
+            <i class="bi bi-heart-pulse"></i> Mis Mascotas
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
+            <i class="bi bi-clipboard2-pulse"></i> Triaje de Síntomas
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
+            <i class="bi bi-calendar-event"></i> Reservar Cita
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="Tienda.html">
+            <i class="bi bi-bag-dash"></i> PetShop / Tienda
+        </a>
+    </li>
 
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 text-light d-flex align-items-center gap-2" href="mascotas.html">
-                <i class="bi bi-heart-pulse text-personalizado-morado"></i>
-                Mis Mascotas
-            </a>
-        </li>
+    <!-- SOLO para Veterinario y Admin -->
+    <li class="nav-item menu-veterinario">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="veterinario.html">
+            <i class="bi bi-clipboard2-heart"></i> Veterinario
+        </a>
+    </li>
 
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
-                <i class="bi bi-clipboard2-pulse"></i>
-                Triaje de Síntomas
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
-                <i class="bi bi-calendar-event"></i>
-                Reservar Cita
-            </a>
-        </li>
-
-          <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2"
-             href="Tienda.html">
-             <i class="bi bi-bag-dash"></i>
-             PetShop / Tienda
-           </a>
-       </li>
-
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="veterinario.html">
-                <i class="bi bi-clipboard2-heart"></i>
-                Veterinario
-            </a>
-        </li>
-
-
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="admin.html">
-                <i class="bi bi-speedometer2"></i>
-                Administración
-            </a>
-        </li>
-                </ul>
+    <!-- SOLO para Admin -->
+    <li class="nav-item menu-admin">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="admin.html">
+            <i class="bi bi-speedometer2"></i> Administración
+        </a>
+    </li>
+</ul>
                 <div class="position-absolute bottom-0 start-0 w-100 p-3">
                     <hr class="text-secondary">
                     <a href="index.html" class="btn btn-outline-danger w-100 fw-bold d-flex align-items-center justify-content-center gap-2">
@@ -82,6 +74,7 @@
                 </div>
             </nav>
 
+            <!-- Contenido Principal -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4" style="margin-left: 16.666667% !important;">
                 
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom border-personalizado-gris">
@@ -90,6 +83,7 @@
 
                 <div class="row g-4">
 
+                    <!-- Formulario de Agendar Cita -->
                     <div class="col-md-5">
                         <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow">
                             <h4 class="fw-bold text-personalizado-morado mb-3">Agendar Espacio</h4>
@@ -97,7 +91,11 @@
                             <form id="citaForm">
                                 <div class="mb-3">
                                     <label for="citaMascota" class="form-label fw-semibold text-light">Paciente</label>
-                                    <input type="text" id="citaMascota" class="form-control input-personalizado-oscuro" required>
+                                    <!-- CORREGIDO: antes era <input type="text">, ahora es un combo box
+                                         que se llena con las mascotas registradas (js/citas.js) -->
+                                    <select id="citaMascota" class="form-select input-personalizado-oscuro" required>
+                                        <option value="" disabled selected>Seleccione una mascota...</option>
+                                    </select>
                                 </div>
 
                                 <div class="mb-3">
@@ -123,7 +121,7 @@
 
                                 <div class="mb-3">
                                     <label for="citaPrioridad" class="form-label fw-semibold text-light">Prioridad Asignada</label>
-                                    <input type="text" id="citaPrioridad" class="form-control input-personalizado-oscuro fw-bold text-center" readonly>
+                                    <input type="text" id="citaPrioridad" class="form-control input-personalizado-oscuro fw-bold text-center" value="Verde" readonly>
                                 </div>
 
                                 <button type="submit" class="btn btn-personalizado-morado w-100 py-2 fw-bold shadow d-flex align-items-center justify-content-center gap-2">
@@ -133,6 +131,7 @@
                         </div>
                     </div>
 
+                    <!-- Tabla de Consultas Activas -->
                     <div class="col-md-7">
                         <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow h-100">
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -170,6 +169,9 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/citas.js"></script>
+    <script src="js/permisos.js"></script>
 </body>
 </html>

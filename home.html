@@ -30,60 +30,47 @@
     <hr class="text-secondary">
 
     <ul class="nav flex-column gap-2">
+    <!-- Visibles para TODOS (Cliente, Veterinario, Admin) -->
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="home.html">
+            <i class="bi bi-house-door"></i> Inicio
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="mascotas.html">
+            <i class="bi bi-heart-pulse"></i> Mis Mascotas
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
+            <i class="bi bi-clipboard2-pulse"></i> Triaje de Síntomas
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
+            <i class="bi bi-calendar-event"></i> Reservar Cita
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="Tienda.html">
+            <i class="bi bi-bag-dash"></i> PetShop / Tienda
+        </a>
+    </li>
 
-        <li class="nav-item">
-            <a class="nav-link active rounded text-white bg-personalizado-morado p-2 d-flex align-items-center gap-2" href="home.html">
-                <i class="bi bi-house-door"></i>
-                Inicio
-            </a>
-        </li>
+    <!-- SOLO para Veterinario y Admin -->
+    <li class="nav-item menu-veterinario">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="veterinario.html">
+            <i class="bi bi-clipboard2-heart"></i> Veterinario
+        </a>
+    </li>
 
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 text-light d-flex align-items-center gap-2" href="mascotas.html">
-                <i class="bi bi-heart-pulse text-personalizado-morado"></i>
-                Mis Mascotas
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
-                <i class="bi bi-clipboard2-pulse"></i>
-                Triaje de Síntomas
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
-                <i class="bi bi-calendar-event"></i>
-                Reservar Cita
-            </a>
-        </li>
-
-          <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2"
-             href="Tienda.html">
-             <i class="bi bi-bag-dash"></i>
-             PetShop / Tienda
-           </a>
-       </li>
-
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="veterinario.html">
-                <i class="bi bi-clipboard2-heart"></i>
-                Veterinario
-            </a>
-        </li>
-
-
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="admin.html">
-                <i class="bi bi-speedometer2"></i>
-                Administración
-            </a>
-        </li>
-
-
-    </ul>
+    <!-- SOLO para Admin -->
+    <li class="nav-item menu-admin">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="admin.html">
+            <i class="bi bi-speedometer2"></i> Administración
+        </a>
+    </li>
+</ul>
 
     <div class="position-absolute bottom-0 start-0 w-100 p-3">
 
@@ -113,10 +100,13 @@
 
 <div class="row g-4 mb-4">
 
+    <!-- CORREGIDO: se agregaron los ids que home.js necesita (statMascotas,
+         statCitas, statTriajes, statProductos). Antes no existían y por eso
+         nunca se actualizaban, aunque el script cargara datos correctamente. -->
     <div class="col-sm-6 col-xl-3">
         <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow-sm text-center">
             <h6 class="text-secondary fw-semibold">Pacientes Activos</h6>
-            <h2 class="fw-bold text-personalizado-morado mt-2">0</h2>
+            <h2 class="fw-bold text-personalizado-morado mt-2" id="statMascotas">0</h2>
             <p class="text-muted small mb-0">Expedientes Clínicos</p>
         </div>
     </div>
@@ -124,7 +114,7 @@
     <div class="col-sm-6 col-xl-3">
         <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow-sm text-center">
             <h6 class="text-secondary fw-semibold">Consultas para Hoy</h6>
-            <h2 class="fw-bold text-warning mt-2">0</h2>
+            <h2 class="fw-bold text-warning mt-2" id="statCitas">0</h2>
             <p class="text-muted small mb-0">Agenda Veterinaria</p>
         </div>
     </div>
@@ -132,7 +122,7 @@
     <div class="col-sm-6 col-xl-3">
         <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow-sm text-center">
             <h6 class="text-secondary fw-semibold">Alertas de Triaje</h6>
-            <h2 class="fw-bold text-danger mt-2">0</h2>
+            <h2 class="fw-bold text-danger mt-2" id="statTriajes">0</h2>
             <p class="text-muted small mb-0">Urgencias Críticas</p>
         </div>
     </div>
@@ -140,7 +130,7 @@
     <div class="col-sm-6 col-xl-3">
         <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow-sm text-center">
             <h6 class="text-secondary fw-semibold">Ventas del Mes</h6>
-            <h2 class="fw-bold text-success mt-2">₡0</h2>
+            <h2 class="fw-bold text-success mt-2" id="statVentas">₡0</h2>
             <p class="text-muted small mb-0">Inventario PetShop</p>
         </div>
     </div>
@@ -214,7 +204,9 @@
 </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="js/home.js"></script>
+<script src="js/permisos.js"></script>
 </body>
 </html>

@@ -1,92 +1,152 @@
-var listaCitas = [];
+$(document).ready(function () {
+    cargarMascotasEnSelect();
 
-document.addEventListener("DOMContentLoaded", function() {
-    var inputPrioridad = document.getElementById("citaPrioridad");
-    
-    if (inputPrioridad) {
-        inputPrioridad.value = "GENERAL (Verde)";
-        inputPrioridad.className = "form-control input-personalizado-oscuro fw-bold text-center text-success border-success";
-    }
+    cargarCitas();
 
-    actualizarTablaCitas();
-});
+    $("#citaForm").submit(function (e) {
+        e.preventDefault();
 
-document.getElementById("citaForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+        var paciente = $("#citaMascota").val();
+        var especialista = $("#citaVeterinario").val();
+        var fecha = $("#citaFecha").val();
+        var hora = $("#citaHora").val();
+        var prioridad = $("#citaPrioridad").val() || "Verde";
 
-    var paciente = document.getElementById("citaMascota").value.trim();
-    var especialista = document.getElementById("citaVeterinario").value;
-    var fecha = document.getElementById("citaFecha").value;
-    var hora = document.getElementById("citaHora").value;
-    var prioridad = document.getElementById("citaPrioridad").value;
-
-    var nuevaCita = {
-        paciente: paciente,
-        especialista: especialista,
-        fecha: fecha,
-        hora: hora,
-        prioridad: prioridad
-    };
-
-    listaCitas.push(nuevaCita);
-
-    document.getElementById("citaForm").reset();
-    document.getElementById("citaPrioridad").value = "GENERAL (Verde)";
-    document.getElementById("citaPrioridad").className = "form-control input-personalizado-oscuro fw-bold text-center text-success border-success";
-
-    actualizarTablaCitas();
-    alert("¡Cita agendada con éxito para " + paciente + "!");
-});
-
-function actualizarTablaCitas() {
-    var tbody = document.getElementById("tablaCitasBody");
-    var mensajeVacio = document.getElementById("tablaVaciaMensaje");
-    var contadorBadge = document.getElementById("contadorCitas");
-
-    tbody.innerHTML = ""; 
-
-    if (listaCitas.length === 0) {
-        mensajeVacio.style.display = "block";
-    } else {
-        mensajeVacio.style.display = "none";
-    }
-
-    contadorBadge.innerText = listaCitas.length + " Citas Registradas";
-
-    for (var i = 0; i < listaCitas.length; i++) {
-        var cita = listaCitas[i];
-        
-        var badgeColor = "bg-success";
-        if (cita.prioridad.indexOf("CRÍTICA") !== -1) {
-            badgeColor = "bg-danger";
-        } else if (cita.prioridad.indexOf("MODERADA") !== -1) {
-            badgeColor = "bg-warning text-dark";
+        if (!paciente) {
+            alert("Por favor seleccione un paciente.");
+            return;
         }
 
-        var fila = document.createElement("tr");
-        fila.className = "border-bottom border-personalizado-gris text-light";
-        
-        fila.innerHTML = `
-            <td class="fw-bold">${cita.paciente}</td>
-            <td class="small text-secondary">${cita.especialista}</td>
-            <td>
-                <span class="d-block small fw-semibold">${cita.fecha}</span>
-                <span class="text-muted small">${cita.hora}</span>
-            </td>
-            <td><span class="badge ${badgeColor} px-2 py-1 small">${cita.prioridad}</span></td>
-            <td>
-                <button type="button" class="btn btn-sm btn-outline-danger border-0" onclick="eliminarCita(${i})">
-                    <i class="bi bi-trash3"></i>
-                </button>
-            </td>
-        `;
-        tbody.appendChild(fila);
-    }
+        var citaData = {
+            paciente: paciente,
+            especialista: especialista,
+            fecha: fecha,
+            hora: hora,
+            prioridad: prioridad
+        };
+
+        $.ajax({
+            url: "app/citas/guardar.php",
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(citaData),
+            success: function (res) {
+                if (res.success || res.status === "ok") {
+                    alert("Cita agendada exitosamente.");
+                    $("#citaForm")[0].reset();
+                    $("#citaPrioridad").val("Verde");
+                    cargarCitas();
+                } else {
+                    alert(res.message || "Error al agendar la cita.");
+                }
+            },
+            error: function () {
+                alert("Ocurrió un error al conectar con el servidor.");
+            }
+        });
+    });
+});
+
+function cargarMascotasEnSelect() {
+    $.ajax({
+        url: "app/mascotas/listar.php",
+        type: "GET",
+        dataType: "json",
+        success: function (res) {
+            var select = $("#citaMascota");
+            select.empty();
+            select.append('<option value="" disabled selected>Seleccione una mascota...</option>');
+
+            var lista = res.data || res;
+
+            if (lista && lista.length > 0) {
+                lista.forEach(function (m) {
+                    select.append(`<option value="${m.nombre}">${m.nombre} (${m.especie})</option>`);
+                });
+            }
+
+            var urlParams = new URLSearchParams(window.location.search);
+            var pacienteParam = urlParams.get('paciente') || urlParams.get('mascota');
+            var prioridadParam = urlParams.get('prioridad');
+
+            if (pacienteParam) {
+                select.val(pacienteParam);
+            }
+            if (prioridadParam) {
+                $("#citaPrioridad").val(prioridadParam);
+            }
+        },
+        error: function () {
+            console.error("Error al obtener la lista de mascotas para el select.");
+        }
+    });
 }
 
-function eliminarCita(indice) {
+function cargarCitas() {
+    $.ajax({
+        url: "app/citas/listar.php",
+        type: "GET",
+        dataType: "json",
+        success: function (res) {
+            var tbody = $("#tablaCitasBody");
+            tbody.empty();
+
+            var listado = res.data || res;
+
+            if (!Array.isArray(listado) || listado.length === 0) {
+                $("#tablaVaciaMensaje").show();
+                $("#contadorCitas").text("0 Citas Registradas");
+                return;
+            }
+
+            $("#tablaVaciaMensaje").hide();
+            $("#contadorCitas").text(listado.length + " Citas Registradas");
+
+            listado.forEach(function (cita) {
+                var nombrePaciente = cita.mascota_nombre || cita.paciente || "Sin nombre";
+                var medico = cita.servicio || cita.especialista || "General";
+                var prio = cita.prioridad || "Verde";
+
+                var badge = "bg-success";
+                if (prio.toUpperCase().includes("ROJO") || prio.toUpperCase().includes("CRÍTICA") || prio.toUpperCase().includes("ALTA")) {
+                    badge = "bg-danger";
+                } else if (prio.toUpperCase().includes("AMARILLO") || prio.toUpperCase().includes("MODERADA") || prio.toUpperCase().includes("MEDIA")) {
+                    badge = "bg-warning text-dark";
+                }
+
+                tbody.append(`
+                    <tr class="border-bottom border-personalizado-gris text-light">
+                        <td class="fw-bold">${nombrePaciente}</td>
+                        <td class="small text-secondary">${medico}</td>
+                        <td>${cita.fecha} - ${cita.hora}</td>
+                        <td><span class="badge ${badge}">${prio}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-danger border-0" onclick="eliminarCita(${cita.id})">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `);
+            });
+        },
+        error: function () {
+            $("#tablaVaciaMensaje").show();
+        }
+    });
+}
+
+function eliminarCita(id) {
     if (confirm("¿Desea cancelar esta cita médica?")) {
-        listaCitas.splice(indice, 1);
-        actualizarTablaCitas();
+        $.ajax({
+            url: "app/citas/eliminar.php",
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify({ id: id }),
+            success: function () {
+                cargarCitas();
+            }
+        });
     }
 }

@@ -4,7 +4,7 @@ var metodoSeleccionado = 'tarjeta';
 document.addEventListener("DOMContentLoaded", function () {
     renderizarResumen();
 
-    document.getElementById("formCheckout").addEventListener("submit", function (e) {
+    $("#formCheckout").on("submit", function (e) {
         e.preventDefault();
 
         if (carritoPago.length === 0) {
@@ -12,11 +12,35 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        alert("¡Pago realizado con éxito mediante " + metodoSeleccionado.toUpperCase() + "! Tu pedido ya está en camino.");
+        var subtotal = carritoPago.reduce(function(acc, p) { 
+            return acc + (p.precio * p.cantidad); 
+        }, 0);
         
-        // Limpiamos el carrito en localStorage y regresamos a la tienda
-        localStorage.removeItem("carritoPetPulse");
-        window.location.href = "Tienda.html";
+        var totalConIva = subtotal * 1.13;
+
+        $.ajax({
+            url: "app/dashboard/pedidos.php",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                total: totalConIva,
+                metodo: metodoSeleccionado
+            }),
+            success: function (res) {
+                if (res.success) {
+                    alert("¡Pago realizado con éxito mediante " + metodoSeleccionado.toUpperCase() + "! Tu pedido ya está en camino.");
+                    
+                    localStorage.removeItem("carritoPetPulse");
+                    window.location.href = "Tienda.html";
+                } else {
+                    alert("Error al procesar el pedido: " + (res.message || "Error desconocido"));
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error AJAX:", error);
+                alert("Ocurrió un error al conectar con el servidor.");
+            }
+        });
     });
 });
 
@@ -26,13 +50,15 @@ function renderizarResumen() {
     var impuestoEl = document.getElementById("resumenImpuesto");
     var totalEl = document.getElementById("resumenTotal");
 
+    if (!contenedor) return;
+
     contenedor.innerHTML = "";
 
     if (carritoPago.length === 0) {
         contenedor.innerHTML = '<p class="text-secondary text-center">El carrito está vacío.</p>';
-        subtotalEl.innerText = "₡0";
-        impuestoEl.innerText = "₡0";
-        totalEl.innerText = "₡0";
+        if (subtotalEl) subtotalEl.innerText = "₡0";
+        if (impuestoEl) impuestoEl.innerText = "₡0";
+        if (totalEl) totalEl.innerText = "₡0";
         return;
     }
 
@@ -58,9 +84,9 @@ function renderizarResumen() {
     var impuesto = subtotal * 0.13;
     var total = subtotal + impuesto;
 
-    subtotalEl.innerText = "₡" + subtotal.toLocaleString();
-    impuestoEl.innerText = "₡" + impuesto.toLocaleString(undefined, { maximumFractionDigits: 0 });
-    totalEl.innerText = "₡" + total.toLocaleString(undefined, { maximumFractionDigits: 0 });
+    if (subtotalEl) subtotalEl.innerText = "₡" + subtotal.toLocaleString();
+    if (impuestoEl) impuestoEl.innerText = "₡" + impuesto.toLocaleString(undefined, { maximumFractionDigits: 0 });
+    if (totalEl) totalEl.innerText = "₡" + total.toLocaleString(undefined, { maximumFractionDigits: 0 });
 }
 
 function seleccionarMetodo(metodo, elemento) {
@@ -70,11 +96,13 @@ function seleccionarMetodo(metodo, elemento) {
     for (var i = 0; i < cards.length; i++) {
         cards[i].classList.remove("active");
     }
-    elemento.classList.add("active");
+    if (elemento) elemento.classList.add("active");
 
     var panelTarjeta = document.getElementById("panelTarjeta");
     var panelExpress = document.getElementById("panelExpress");
     var textoExpress = document.getElementById("textoExpress");
+
+    if (!panelTarjeta || !panelExpress) return;
 
     var inputsTarjeta = panelTarjeta.querySelectorAll("input");
 
@@ -91,12 +119,14 @@ function seleccionarMetodo(metodo, elemento) {
             inputsTarjeta[k].required = false;
         }
 
-        if (metodo === 'paypal') {
-            textoExpress.innerText = "Serás redirigido a PayPal para autenticar y completar tu pago seguro.";
-        } else if (metodo === 'gpay') {
-            textoExpress.innerText = "Se abrirá la ventana emergente de Google Pay para autorizar el cargo.";
-        } else if (metodo === 'applepay') {
-            textoExpress.innerText = "Usa Touch ID / Face ID en tu dispositivo Apple para confirmar el pago.";
+        if (textoExpress) {
+            if (metodo === 'paypal') {
+                textoExpress.innerText = "Serás redirigido a PayPal para autenticar y completar tu pago seguro.";
+            } else if (metodo === 'gpay') {
+                textoExpress.innerText = "Se abrirá la ventana emergente de Google Pay para autorizar el cargo.";
+            } else if (metodo === 'applepay') {
+                textoExpress.innerText = "Usa Touch ID / Face ID en tu dispositivo Apple para confirmar el pago.";
+            }
         }
     }
 }

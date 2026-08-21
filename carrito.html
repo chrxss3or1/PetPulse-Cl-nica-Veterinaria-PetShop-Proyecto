@@ -38,42 +38,47 @@
                 </span>
                 <hr class="text-secondary">
                 <ul class="nav flex-column gap-2">
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="home.html">
-                            <i class="bi bi-house-door"></i> Inicio
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="mascotas.html">
-                            <i class="bi bi-heart-pulse"></i> Mis Mascotas
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
-                            <i class="bi bi-clipboard2-pulse"></i> Triaje de Síntomas
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
-                            <i class="bi bi-calendar-event"></i> Reservar Cita
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="Tienda.html">
-                            <i class="bi bi-bag-dash"></i> PetShop / Tienda
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="veterinario.html">
-                            <i class="bi bi-clipboard2-heart"></i> Veterinario
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary link-hover p-2 d-flex align-items-center gap-2" href="admin.html">
-                            <i class="bi bi-speedometer2"></i> Administración
-                        </a>
-                    </li>
-                </ul>
+ 
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="home.html">
+            <i class="bi bi-house-door"></i> Inicio
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="mascotas.html">
+            <i class="bi bi-heart-pulse"></i> Mis Mascotas
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
+            <i class="bi bi-clipboard2-pulse"></i> Triaje de Síntomas
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
+            <i class="bi bi-calendar-event"></i> Reservar Cita
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="Tienda.html">
+            <i class="bi bi-bag-dash"></i> PetShop / Tienda
+        </a>
+    </li>
+
+    <!-- SOLO para Veterinario y Admin -->
+    <li class="nav-item menu-veterinario">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="veterinario.html">
+            <i class="bi bi-clipboard2-heart"></i> Veterinario
+        </a>
+    </li>
+
+    <!-- SOLO para Admin -->
+    <li class="nav-item menu-admin">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="admin.html">
+            <i class="bi bi-speedometer2"></i> Administración
+        </a>
+    </li>
+</ul>
                 <div class="position-absolute bottom-0 start-0 w-100 p-3">
                     <hr class="text-secondary">
                     <a href="index.html" class="btn btn-outline-danger w-100 fw-bold d-flex align-items-center justify-content-center gap-2">
@@ -154,7 +159,7 @@
                                 <div id="panelTarjeta">
                                     <div class="d-flex align-items-center gap-2 mb-3">
                                         <span class="small text-secondary">Marcas aceptadas:</span>
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" height="18" class="bg-white p-1 rounded">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Visa_Inc._logo_%282021%E2%80%93present%29.svg" alt="Visa" height="18" class="bg-white p-1 rounded">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" height="18">
                                     </div>
 
@@ -224,5 +229,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/carrito.js"></script>
+    <script src="home.js"></script>
+    <script src="js/permisos.js"></script>
 </body>
 </html>

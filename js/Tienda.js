@@ -1,5 +1,5 @@
-var productosTienda = [
-{ id: 1, nombre: "Alimento Premium Perro Adulto", categoria: "Alimento", precio: 15000, img: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=500&q=80" },
+var productosBase = [
+    { id: 1, nombre: "Alimento Premium Perro Adulto", categoria: "Alimento", precio: 15000, img: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=500&q=80" },
     { id: 2, nombre: "Alimento Gato Esterilizado", categoria: "Alimento", precio: 12500, img: "https://images.unsplash.com/photo-1596854331442-3cf47265cefb?w=500&q=80" },
     { id: 3, nombre: "Snacks Naturales Perro", categoria: "Alimento", precio: 4500, img: "https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=500&q=80" },
     { id: 4, nombre: "Collar Ajustable Mediano", categoria: "Accesorio", precio: 5000, img: "https://plus.unsplash.com/premium_photo-1692392181661-96c4b34759db?w=500&q=80" },
@@ -10,12 +10,12 @@ var productosTienda = [
     { id: 9, nombre: "Suplemento Vitamínico", categoria: "Medicamento", precio: 11000, img: "https://images.unsplash.com/photo-1584017911766-d451b3d0e843?w=500&q=80" }
 ];
 
+var productosTienda = [];
 var carrito = JSON.parse(localStorage.getItem("carritoPetPulse")) || [];
 var filtroActual = "todos";
 
 document.addEventListener("DOMContentLoaded", function() {
-
-    pintarProductos();
+    obtenerProductosBD();
     pintarCarrito();
 
     var botonesFiltro = document.querySelectorAll(".filtro-btn");
@@ -30,31 +30,62 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Al hacer clic en Procesar Pedido, guardamos y redirigimos a carrito.html
-    document.getElementById("btnProcesarPedido").addEventListener("click", function() {
-        if (carrito.length === 0) {
-            alert("El carrito está vacío.");
-            return;
-        }
-        guardarCarrito();
-        window.location.href = "carrito.html";
-    });
-
+    var btnProcesar = document.getElementById("btnProcesarPedido");
+    if (btnProcesar) {
+        btnProcesar.addEventListener("click", function() {
+            if (carrito.length === 0) {
+                alert("El carrito está vacío.");
+                return;
+            }
+            guardarCarrito();
+            window.location.href = "carrito.html";
+        });
+    }
 });
+
+function obtenerProductosBD() {
+    $.ajax({
+        url: "app/productos/listar.php",
+        type: "GET",
+        success: function(res) {
+            var productosBD = res.data || res;
+            if (Array.isArray(productosBD) && productosBD.length > 0) {
+                var formateados = productosBD.map(function(p) {
+                    return {
+                        id: 'bd_' + p.id,
+                        nombre: p.nombre,
+                        categoria: p.categoria || "General",
+                        precio: Number(p.precio),
+                        img: p.imagen ? p.imagen : "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=500&q=80"
+                    };
+                });
+                productosTienda = formateados.concat(productosBase);
+            } else {
+                productosTienda = productosBase;
+            }
+            pintarProductos();
+        },
+        error: function() {
+            productosTienda = productosBase;
+            pintarProductos();
+        }
+    });
+}
 
 function pintarProductos() {
     var cont = document.getElementById("contenedorProductos");
+    if (!cont) return;
     cont.innerHTML = "";
 
     for (var i = 0; i < productosTienda.length; i++) {
         var p = productosTienda[i];
 
-        if (filtroActual !== "todos" && p.categoria !== filtroActual) {
+        if (filtroActual !== "todos" && p.categoria.toLowerCase() !== filtroActual.toLowerCase()) {
             continue;
         }
 
         var col = document.createElement("div");
-        col.className = "col-sm-6 col-lg-4";
+        col.className = "col-sm-6 col-lg-4 mb-4";
         col.innerHTML =
             '<div class="card bg-black text-white border-secondary h-100 shadow-sm">' +
                 '<img src="' + p.img + '" class="card-img-top" alt="' + p.nombre + '" style="height: 180px; object-fit: cover;">' +
@@ -62,8 +93,8 @@ function pintarProductos() {
                     '<span class="badge bg-personalizado-morado align-self-start mb-2">' + p.categoria + '</span>' +
                     '<h6 class="fw-bold mb-1">' + p.nombre + '</h6>' +
                     '<p class="text-secondary fw-bold mb-3">₡' + p.precio.toLocaleString() + '</p>' +
-                    '<button class="btn btn-outline-light btn-sm mt-auto" onclick="agregarAlCarrito(' + p.id + ')">' +
-                        '<i class="bi bi-cart-plus"></i> Agregar al carrito' +
+                    '<button class="btn btn-outline-light btn-sm mt-auto" onclick="agregarAlCarrito(\'' + p.id + '\')">' +
+                    '<i class="bi bi-cart-plus"></i> Agregar al carrito' +
                     '</button>' +
                 '</div>' +
             '</div>';
@@ -73,8 +104,10 @@ function pintarProductos() {
 }
 
 function agregarAlCarrito(id) {
-    var producto = productosTienda.find(function(p) { return p.id === id; });
-    var existente = carrito.find(function(c) { return c.id === id; });
+    var producto = productosTienda.find(function(p) { return p.id == id; });
+    if (!producto) return;
+    
+    var existente = carrito.find(function(c) { return c.id == id; });
 
     if (existente) {
         existente.cantidad++;
@@ -87,13 +120,13 @@ function agregarAlCarrito(id) {
 }
 
 function quitarDelCarrito(id) {
-    carrito = carrito.filter(function(c) { return c.id !== id; });
+    carrito = carrito.filter(function(c) { return c.id != id; });
     guardarCarrito();
     pintarCarrito();
 }
 
 function cambiarCantidad(id, delta) {
-    var item = carrito.find(function(c) { return c.id === id; });
+    var item = carrito.find(function(c) { return c.id == id; });
     if (!item) return;
 
     item.cantidad += delta;
@@ -113,6 +146,7 @@ function guardarCarrito() {
 function pintarCarrito() {
     var lista = document.getElementById("listaCarrito");
     var badge = document.getElementById("badgeCarrito");
+    if (!lista) return;
 
     lista.innerHTML = "";
 
@@ -135,12 +169,12 @@ function pintarCarrito() {
                 '<p class="mb-0 small fw-semibold">' + item.nombre + '</p>' +
                 '<p class="mb-0 small text-secondary">₡' + item.precio.toLocaleString() + ' c/u</p>' +
                 '<div class="d-flex align-items-center gap-2 mt-1">' +
-                    '<button class="btn btn-sm btn-outline-light py-0 px-2" onclick="cambiarCantidad(' + item.id + ', -1)">-</button>' +
+                    '<button class="btn btn-sm btn-outline-light py-0 px-2" onclick="cambiarCantidad(\'' + item.id + '\', -1)">-</button>' +
                     '<span>' + item.cantidad + '</span>' +
-                    '<button class="btn btn-sm btn-outline-light py-0 px-2" onclick="cambiarCantidad(' + item.id + ', 1)">+</button>' +
+                    '<button class="btn btn-sm btn-outline-light py-0 px-2" onclick="cambiarCantidad(\'' + item.id + '\', 1)">+</button>' +
                 '</div>' +
             '</div>' +
-            '<button class="btn btn-sm btn-outline-danger border-0" onclick="quitarDelCarrito(' + item.id + ')"><i class="bi bi-trash3"></i></button>';
+            '<button class="btn btn-sm btn-outline-danger border-0" onclick="quitarDelCarrito(\'' + item.id + '\')"><i class="bi bi-trash3"></i></button>';
 
         lista.appendChild(fila);
     }
@@ -148,8 +182,8 @@ function pintarCarrito() {
     var impuesto = subtotal * 0.13;
     var total = subtotal + impuesto;
 
-    document.getElementById("carritoSubtotal").innerText = "₡" + subtotal.toLocaleString();
-    document.getElementById("carritoImpuesto").innerText = "₡" + impuesto.toLocaleString(undefined, {maximumFractionDigits: 0});
-    document.getElementById("carritoTotal").innerText = "₡" + total.toLocaleString(undefined, {maximumFractionDigits: 0});
-    badge.innerText = totalItems;
+    if (document.getElementById("carritoSubtotal")) document.getElementById("carritoSubtotal").innerText = "₡" + subtotal.toLocaleString();
+    if (document.getElementById("carritoImpuesto")) document.getElementById("carritoImpuesto").innerText = "₡" + impuesto.toLocaleString(undefined, {maximumFractionDigits: 0});
+    if (document.getElementById("carritoTotal")) document.getElementById("carritoTotal").innerText = "₡" + total.toLocaleString(undefined, {maximumFractionDigits: 0});
+    if (badge) badge.innerText = totalItems;
 }

@@ -13,6 +13,7 @@
     <div class="container-fluid">
         <div class="row">
             
+            <!-- Barra Lateral / Navigation -->
             <nav class="col-md-3 col-lg-2 d-md-block bg-personalizado-gris sidebar vh-100 p-3 fixed-top border-end border-personalizado-gris">
                 <div class="mb-4 text-center text-md-start d-flex align-items-center gap-2">
                     <i class="bi bi-activity text-personalizado-morado fs-4"></i>
@@ -23,57 +24,47 @@
                 </span>
                 <hr class="text-secondary">
                 <ul class="nav flex-column gap-2">
-                    <li class="nav-item">
-            <a class="nav-link active rounded text-white bg-personalizado-morado p-2 d-flex align-items-center gap-2" href="home.html">
-                <i class="bi bi-house-door"></i>
-                Inicio
-            </a>
-        </li>
 
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 text-light d-flex align-items-center gap-2" href="mascotas.html">
-                <i class="bi bi-heart-pulse text-personalizado-morado"></i>
-                Mis Mascotas
-            </a>
-        </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="home.html">
+            <i class="bi bi-house-door"></i> Inicio
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="mascotas.html">
+            <i class="bi bi-heart-pulse"></i> Mis Mascotas
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
+            <i class="bi bi-clipboard2-pulse"></i> Triaje de Síntomas
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
+            <i class="bi bi-calendar-event"></i> Reservar Cita
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="Tienda.html">
+            <i class="bi bi-bag-dash"></i> PetShop / Tienda
+        </a>
+    </li>
 
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="triaje.html">
-                <i class="bi bi-clipboard2-pulse"></i>
-                Triaje de Síntomas
-            </a>
-        </li>
+    <!-- SOLO para Veterinario y Admin -->
+    <li class="nav-item menu-veterinario">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="veterinario.html">
+            <i class="bi bi-clipboard2-heart"></i> Veterinario
+        </a>
+    </li>
 
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="citas.html">
-                <i class="bi bi-calendar-event"></i>
-                Reservar Cita
-            </a>
-        </li>
-
-          <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2"
-             href="Tienda.html">
-             <i class="bi bi-bag-dash"></i>
-             PetShop / Tienda
-           </a>
-       </li>
-
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="veterinario.html">
-                <i class="bi bi-clipboard2-heart"></i>
-                Veterinario
-            </a>
-        </li>
-
-
-        <li class="nav-item">
-            <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="admin.html">
-                <i class="bi bi-speedometer2"></i>
-                Administración
-            </a>
-        </li>
-                </ul>
+    <!-- SOLO para Admin -->
+    <li class="nav-item menu-admin">
+        <a class="nav-link rounded text-secondary link-hover p-2 d-flex align-items-center gap-2" href="admin.html">
+            <i class="bi bi-speedometer2"></i> Administración
+        </a>
+    </li>
+</ul>
                 <div class="position-absolute bottom-0 start-0 w-100 p-3">
                     <hr class="text-secondary">
                     <a href="index.html" class="btn btn-outline-danger w-100 fw-bold d-flex align-items-center justify-content-center gap-2">
@@ -82,6 +73,7 @@
                 </div>
             </nav>
 
+            <!-- Contenido Principal -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4" style="margin-left: 16.666667% !important;">
                 
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom border-personalizado-gris">
@@ -91,18 +83,21 @@
                 <div id="alertContainer"></div>
 
                 <div class="row g-4 mb-5">
+                    <!-- Formulario de Registro / Edición -->
                     <div class="col-lg-4">
                         <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow">
-                            <h4 class="fw-bold text-personalizado-morado mb-3">Registrar Paciente</h4>
+                            <h4 class="fw-bold text-personalizado-morado mb-3" id="formTitulo">Registrar Paciente</h4>
                             
-                            <form id="mascotaForm">
+                            <form id="mascotaForm" enctype="multipart/form-data">
+                                <input type="hidden" id="idMascota" name="id" value="">
+
                                 <div class="mb-3">
                                     <label for="nombreMascota" class="form-label fw-semibold text-light">Nombre de la Mascota</label>
-                                    <input type="text" id="nombreMascota" class="form-control input-personalizado-oscuro" placeholder="Ej: Toby" required>
+                                    <input type="text" id="nombreMascota" name="nombre" class="form-control input-personalizado-oscuro" placeholder="Ej: Toby" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="especieMascota" class="form-label fw-semibold text-light">Especie</label>
-                                    <select id="especieMascota" class="form-control input-personalizado-oscuro" required>
+                                    <select id="especieMascota" name="especie" class="form-control input-personalizado-oscuro" required>
                                         <option value="">Seleccione...</option>
                                         <option value="Perro">Perro</option>
                                         <option value="Gato">Gato</option>
@@ -111,25 +106,32 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="edadMascota" class="form-label fw-semibold text-light">Edad (Años)</label>
-                                    <input type="number" id="edadMascota" class="form-control input-personalizado-oscuro" placeholder="Ej: 3" min="0" required>
+                                    <input type="number" id="edadMascota" name="edad" class="form-control input-personalizado-oscuro" placeholder="Ej: 3" min="0" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="fotoMascota" class="form-label fw-semibold text-light">Fotografía de la Mascota</label>
-                                    <input type="file" id="fotoMascota" class="form-control input-personalizado-oscuro" accept="image/*" required>
+                                    <input type="file" id="fotoMascota" name="foto" class="form-control input-personalizado-oscuro" accept="image/*">
                                 </div>
-                                <button type="submit" class="btn btn-personalizado-morado w-100 py-2 fw-bold shadow d-flex align-items-center justify-content-center gap-2">
-                                    <i class="bi bi-floppy"></i> Guardar Expediente
-                                </button>
+                                
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-personalizado-morado w-100 py-2 fw-bold shadow d-flex align-items-center justify-content-center gap-2" id="btnGuardar">
+                                        <i class="bi bi-floppy"></i> Guardar Expediente
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary d-none" id="btnCancelarEdicion" onclick="limpiarFormulario()">
+                                        Cancelar
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>
 
+                    <!-- Lista de Mascotas (Tarjetas) -->
                     <div class="col-lg-8">
                         <div class="bg-personalizado-gris p-4 rounded-4 border border-personalizado-gris shadow h-100">
                             <h4 class="fw-bold text-light mb-3">Expedientes Activos</h4>
                             
                             <div class="row row-cols-1 row-cols-md-2 g-3" id="contenedorMascotas">
-                                <p id="textoVacio" class="text-secondary ps-3">No hay mascotas registradas actualmente.</p>
+                                <p id="textoVacio" class="text-secondary ps-3">Cargando mascotas...</p>
                             </div>
                         </div>
                     </div>
@@ -140,6 +142,8 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="js/mascotas.js"></script>
+    <script src="js/permisos.js"></script>
 </body>
 </html>
